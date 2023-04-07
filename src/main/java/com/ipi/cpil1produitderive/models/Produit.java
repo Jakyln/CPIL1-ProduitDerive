@@ -2,7 +2,7 @@ package com.ipi.cpil1produitderive.models;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -16,7 +16,7 @@ public class Produit {
     private String code;
     private Double prixAchat;
     private Double prixVente;
-    private Date dateReaprovisonnementFournisseur;
+    private LocalDate dateReaprovisonnementFournisseur;
     private Integer quantiteEnStock;
 
     @ManyToOne
@@ -30,7 +30,7 @@ public class Produit {
     public Produit() {
     }
 
-    public Produit(Long id, String nom, String code, Double prixAchat, Double prixVente, Date dateReaprovisonnementFournisseur, Integer quantiteEnStock) {
+    public Produit(Long id, String nom, String code, Double prixAchat, Double prixVente, LocalDate dateReaprovisonnementFournisseur, Integer quantiteEnStock) {
         this.id = id;
         this.nom = nom;
         this.code = code;
@@ -80,11 +80,11 @@ public class Produit {
         this.prixVente = prixVente;
     }
 
-    public Date getDateReaprovisonnementFournisseur() {
+    public LocalDate getDateReaprovisonnementFournisseur() {
         return dateReaprovisonnementFournisseur;
     }
 
-    public void setDateReaprovisonnementFournisseur(Date dateReaprovisonnementFournisseur) {
+    public void setDateReaprovisonnementFournisseur(LocalDate dateReaprovisonnementFournisseur) {
         this.dateReaprovisonnementFournisseur = dateReaprovisonnementFournisseur;
     }
 
