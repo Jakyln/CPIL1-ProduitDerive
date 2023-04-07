@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommandeProduitDAO extends JpaRepository<CommandeProduit, Long> {
+
 }
