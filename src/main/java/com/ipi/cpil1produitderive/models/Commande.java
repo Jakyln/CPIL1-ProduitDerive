@@ -2,7 +2,8 @@ package com.ipi.cpil1produitderive.models;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -12,8 +13,8 @@ public class Commande {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Date dateLivraison;
-    private Date dateCommande;
+    private LocalDate dateLivraison;
+    private LocalDateTime dateCommande;
     private Boolean isPurchasedOnline;
     private Boolean isValide;
 
@@ -32,7 +33,7 @@ public class Commande {
     public Commande() {
     }
 
-    public Commande(Long id, Date dateLivraison, Date dateCommande, Boolean isPurchasedOnline, Boolean isValide) {
+    public Commande(Long id, LocalDate dateLivraison, LocalDateTime dateCommande, Boolean isPurchasedOnline, Boolean isValide) {
         this.id = id;
         this.dateLivraison = dateLivraison;
         this.dateCommande = dateCommande;
@@ -48,19 +49,19 @@ public class Commande {
         this.id = id;
     }
 
-    public Date getDateLivraison() {
+    public LocalDate getDateLivraison() {
         return dateLivraison;
     }
 
-    public void setDateLivraison(Date dateLivraison) {
+    public void setDateLivraison(LocalDate dateLivraison) {
         this.dateLivraison = dateLivraison;
     }
 
-    public Date getDateCommande() {
+    public LocalDateTime getDateCommande() {
         return dateCommande;
     }
 
-    public void setDateCommande(Date dateCommande) {
+    public void setDateCommande(LocalDateTime dateCommande) {
         this.dateCommande = dateCommande;
     }
 
