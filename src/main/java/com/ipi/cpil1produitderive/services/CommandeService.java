@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class CommandeService {
     @Autowired
     private CommandeDAO commandeDAO;
@@ -26,7 +25,7 @@ public class CommandeService {
     private CommandeProduitDAO commandeProduitDAO;
 
     public double getSumPrixAchatCommandeOnline(){
-        double sumCommandeOnline = 0d;
+        /*double sumCommandeOnline = 0d;
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
         for (Utilisateur utilisateur : utilisateurs) {
@@ -40,7 +39,8 @@ public class CommandeService {
                 }
             }
         }
-        return sumCommandeOnline;
+        return sumCommandeOnline;*/
+        return commandeProduitDAO.getSumOfCommandeOnline();
     }
 
     public double getSumPrixAchatCommandeOnlineOfProduit(Produit produit){
