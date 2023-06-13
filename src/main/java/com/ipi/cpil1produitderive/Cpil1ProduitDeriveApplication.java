@@ -14,24 +14,26 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories
 @EntityScan( basePackages  = { "com.ipi.cpil1produitderive" })
-public class Cpil1ProduitDeriveApplication /*implements CommandLineRunner*/ {
+public class Cpil1ProduitDeriveApplication implements CommandLineRunner {
+    @Autowired
+    CommandeController commandeController;
     public static void main(String[] args) {
-        ApplicationContext applicationContext = SpringApplication.run(Cpil1ProduitDeriveApplication.class, args);
+/*        ApplicationContext applicationContext = SpringApplication.run(Cpil1ProduitDeriveApplication.class, args);
         CommandeController commandeController = applicationContext.getBean(CommandeController.class);
         System.out.println("------------------------ APP BOOT ------------------------");
         System.out.println(" Somme du prix d'achat total des produits vendus en ligne : " + commandeController.getSumPrixAchatCommandeOnline());
-        System.out.println("------------------------ APP END ------------------------");
+        System.out.println("------------------------ APP END ------------------------");*/
 
-        //SpringApplication.run(Cpil1ProduitDeriveApplication.class, args);
+        SpringApplication.run(Cpil1ProduitDeriveApplication.class, args);
     }
 
- /*   @Override
+    @Override
     public void run(String... args) throws Exception {
-        *//*ApplicationContext applicationContext = SpringApplication.run(Cpil1ProduitDeriveApplication.class, args);
-        CommandeController commandeController = applicationContext.getBean(CommandeController.class);*//*
+        //ApplicationContext applicationContext = SpringApplication.run(Cpil1ProduitDeriveApplication.class, args);
+        //CommandeController commandeController = applicationContext.getBean(CommandeController.class);
         System.out.println("------------------------ APP BOOT ------------------------");
-        System.out.println(" Somme du prix d'achat total des produits vendus en ligne : " + commandeController.getSumPrixAchatCommandeOnline());
+        System.out.println(" Somme du prix d'achat total des produits vendus en ligne : " + commandeController.getStatsCommande());
         System.out.println("------------------------ APP BOOT ------------------------");
 
-    }*/
+    }
 }

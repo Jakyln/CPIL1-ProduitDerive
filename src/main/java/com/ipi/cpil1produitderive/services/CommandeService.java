@@ -24,7 +24,7 @@ public class CommandeService {
     @Autowired
     private CommandeProduitDAO commandeProduitDAO;
 
-    public double getSumPrixAchatCommandeOnline(){
+    public double getSumPrixAchatOfCommandeOnline(){
         /*double sumCommandeOnline = 0d;
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
@@ -40,11 +40,11 @@ public class CommandeService {
             }
         }
         return sumCommandeOnline;*/
-        return commandeProduitDAO.getSumOfCommandeOnline();
+        return commandeProduitDAO.getSumPrixAchatOfCommandeOnline();
     }
 
-    public double getSumPrixAchatCommandeOnlineOfProduit(Produit produit){
-        double sumCommandeOnline = 0d;
+    public double getSumPrixAchatOfCommandeOnlineOfProduit(Produit produit){
+        /*double sumCommandeOnline = 0d;
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
         for (Utilisateur utilisateur : utilisateurs) {
@@ -59,13 +59,13 @@ public class CommandeService {
                     }
                 }
             }
-        }
-        return sumCommandeOnline;
+        }*/
+        return commandeProduitDAO.getSumPrixAchatOfCommandeOnlineOfProduit(produit.getId());
     }
 
 
-    public double getSumPrixVenteCommandeOnline(){
-        double sumCommandeOnline = 0d;
+    public double getSumPrixVenteOfCommandeOnline(){
+        /*double sumCommandeOnline = 0d;
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
         for (Utilisateur utilisateur : utilisateurs) {
@@ -78,12 +78,12 @@ public class CommandeService {
                     }
                 }
             }
-        }
-        return sumCommandeOnline;
+        }*/
+        return commandeProduitDAO.getSumPrixVenteOfCommandeOnline();
     }
 
-    public double getSumPrixVenteCommandeOnlineOfProduit(Produit produit){
-        double sumCommandeOnline = 0d;
+    public double getSumPrixVenteOfCommandeOnlineOfProduit(Produit produit){
+        /*double sumCommandeOnline = 0d;
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
         for (Utilisateur utilisateur : utilisateurs) {
@@ -98,14 +98,14 @@ public class CommandeService {
                     }
                 }
             }
-        }
-        return sumCommandeOnline;
+        }*/
+        return commandeProduitDAO.getSumPrixVenteOfCommandeOnlineOfProduit(produit.getId());
     }
 
 
 
-    public double getSumPrixAchatCommandeOffline(){
-        double sumCommandeOnline = 0d;
+    public double getSumPrixAchatOfCommandeOffline(){
+        /*double sumCommandeOnline = 0d;
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
         for (Utilisateur utilisateur : utilisateurs) {
@@ -118,12 +118,12 @@ public class CommandeService {
                     }
                 }
             }
-        }
-        return sumCommandeOnline;
+        }*/
+        return commandeProduitDAO.getSumPrixAchatOfCommandeOffline();
     }
 
-    public double getSumPrixAchatCommandeOfflineOfProduit(Produit produit){
-        double sumCommandeOnline = 0d;
+    public double getSumPrixAchatOfCommandeOfflineOfProduit(Produit produit){
+        /*double sumCommandeOnline = 0d;
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
         for (Utilisateur utilisateur : utilisateurs) {
@@ -138,13 +138,13 @@ public class CommandeService {
                     }
                 }
             }
-        }
-        return sumCommandeOnline;
+        }*/
+        return commandeProduitDAO.getSumPrixAchatOfCommandeOfflineOfProduit(produit.getId());
     }
 
 
-    public double getSumPrixVenteCommandeOffline(){
-        double sumCommandeOnline = 0d;
+    public double getSumPrixVenteOfCommandeOffline(){
+        /*double sumCommandeOnline = 0d;
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
         for (Utilisateur utilisateur : utilisateurs) {
@@ -157,12 +157,12 @@ public class CommandeService {
                     }
                 }
             }
-        }
-        return sumCommandeOnline;
+        }*/
+        return commandeProduitDAO.getSumPrixVenteOfCommandeOffline();
     }
 
-    public double getSumPrixVenteCommandeOfflineOfProduit(Produit produit){
-        double sumCommandeOnline = 0d;
+    public double getSumPrixVenteOfCommandeOfflineOfProduit(Produit produit){
+        /*double sumCommandeOnline = 0d;
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
         for (Utilisateur utilisateur : utilisateurs) {
@@ -177,7 +177,7 @@ public class CommandeService {
                     }
                 }
             }
-        }
-        return sumCommandeOnline;
+        }*/
+        return commandeProduitDAO.getSumPrixVenteOfCommandeOfflineOfProduit(produit.getId());
     }
 }
