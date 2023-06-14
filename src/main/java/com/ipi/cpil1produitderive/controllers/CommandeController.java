@@ -26,6 +26,23 @@ public class CommandeController {
         statsVente.put("sumPrixAchatOfCommandeOffline",sumPrixAchatOfCommandeOffline);
         statsVente.put("sumPrixVenteOfCommandeOffline",sumPrixVenteOfCommandeOffline);
 
+
+        System.out.println();
+        System.out.println();
+
+        System.out.println("------------------  ------------------ ");
+        System.out.printf("--------------------------------%n");
+        System.out.printf(" (1) STATISTIQUES COMMANDES         %n");
+        System.out.printf("--------------------------------%n");
+
+        System.out.printf("/", "EN PRESENTIEL", "EN LIGNE");
+        System.out.printf("--------------------------------%n");
+
+        System.out.printf("| Somme de prix Achat | " + sumPrixAchatOfCommandeOffline + " | " + sumPrixAchatCommandeOnline);
+        System.out.printf("| Somme de prix Vente | " + sumPrixVenteOfCommandeOffline + " | " + sumPrixVenteOfCommandeOnline);
+        System.out.printf("--------------------------------%n");
+
+        //TODO finir clean tableau
         return statsVente;
     }
 }
