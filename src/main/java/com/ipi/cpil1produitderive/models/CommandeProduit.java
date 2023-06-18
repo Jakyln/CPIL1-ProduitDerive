@@ -19,8 +19,7 @@ public class CommandeProduit {
     public CommandeProduit() {
     }
 
-    public CommandeProduit(Long id, Integer quantite, Commande commande, Produit produit) {
-        this.id = id;
+    public CommandeProduit(Integer quantite, Commande commande, Produit produit) {
         this.quantite = quantite;
         this.commande = commande;
         this.produit = produit;

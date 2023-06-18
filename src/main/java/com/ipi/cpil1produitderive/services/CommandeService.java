@@ -12,6 +12,7 @@ import jdk.jshell.execution.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +30,11 @@ public class CommandeService {
 
         List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
         for (Utilisateur utilisateur : utilisateurs) {
-            List<Commande> commandes = utilisateur.getCommandes();
+            List<Commande> commandes = commandeDAO.findAllByUtilisateur(utilisateur);
+            System.out.println(utilisateur.getId());
+            //List<Commande> commandes = commandeDAO.findAll();
+            //List<Commande> commandes = new ArrayList<>();
+            System.out.println("commandes :" + utilisateur.getCommandes().size());
             for (Commande commande : commandes) {
                 if(commande.getPurchasedOnline()){
                     List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
@@ -39,6 +44,8 @@ public class CommandeService {
                 }
             }
         }
+        System.out.println(" fonc getSumPrixAchatOfCommandeOnline : res loop ="
+                + sumCommandeOnline + "| res SQL =" + commandeProduitDAO.getSumPrixAchatOfCommandeOnline());
         return sumCommandeOnline;*/
         return commandeProduitDAO.getSumPrixAchatOfCommandeOnline();
     }

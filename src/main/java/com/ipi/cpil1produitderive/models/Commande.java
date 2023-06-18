@@ -33,8 +33,7 @@ public class Commande {
     public Commande() {
     }
 
-    public Commande(Long id, LocalDate dateLivraison, LocalDateTime dateCommande, Boolean isPurchasedOnline, Boolean isValide) {
-        this.id = id;
+    public Commande(LocalDate dateLivraison, LocalDateTime dateCommande, Boolean isPurchasedOnline, Boolean isValide) {
         this.dateLivraison = dateLivraison;
         this.dateCommande = dateCommande;
         this.isPurchasedOnline = isPurchasedOnline;
