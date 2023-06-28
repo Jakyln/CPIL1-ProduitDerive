@@ -20,8 +20,7 @@ public class Famille {
     public Famille() {
     }
 
-    public Famille(Long id, String nom, String code) {
-        this.id = id;
+    public Famille(String nom, String code) {
         this.nom = nom;
         this.code = code;
     }
