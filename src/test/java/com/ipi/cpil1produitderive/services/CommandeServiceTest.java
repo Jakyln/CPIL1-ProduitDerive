@@ -105,7 +105,7 @@ public class CommandeServiceTest {
         double result = commandeService.getSumPrixAchatOfCommandeOnline();
         Assertions.assertThat(result).isEqualTo(sumPrixAchatCommandeOnline);
     }
-    
+
     public void testGetSumPrixAchatOfCommandeNotOnline(){
         Produit produit1 = new Produit("P1", "P1", 2.5, 8.0, LocalDate.now(), 40);
         Produit produit2 = new Produit("P2", "P2", 3.5, 10.0, LocalDate.now(), 30);
