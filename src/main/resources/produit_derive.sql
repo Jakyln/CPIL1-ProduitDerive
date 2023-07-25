@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3308
--- Generation Time: Apr 07, 2023 at 09:13 AM
+-- Generation Time: Jul 25, 2023 at 08:59 AM
 -- Server version: 10.6.9-MariaDB-log
 -- PHP Version: 7.3.2
 
@@ -269,7 +269,11 @@ CREATE TABLE `utilisateur` (
   `motDePasse` varchar(20) NOT NULL,
   `idAdresse` int(11) NOT NULL,
   `idPays` int(11) NOT NULL,
-  `idRole` int(11) NOT NULL
+  `idRole` int(11) NOT NULL,
+  `mot_de_passe` varchar(255) DEFAULT NULL,
+  `adresse_id` bigint(20) DEFAULT NULL,
+  `pays_id` bigint(20) DEFAULT NULL,
+  `role_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --

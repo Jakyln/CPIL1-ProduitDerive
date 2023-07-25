@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
+@Entity(name = "produit")
+@Table(name = "produit", schema = "produit_derive", catalog = "produit_derive")
 public class Produit {
 
     @Id

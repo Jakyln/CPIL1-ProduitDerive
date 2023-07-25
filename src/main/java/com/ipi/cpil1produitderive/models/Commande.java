@@ -6,7 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
+@Entity(name = "commande")
+@Table(name = "commande", schema = "produit_derive", catalog = "produit_derive")
 public class Commande {
 
     @Id
