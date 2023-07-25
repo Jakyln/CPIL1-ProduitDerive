@@ -22,8 +22,8 @@ public class Produit {
     private Double prixAchat;
     @Column(name = "prixVente")
     private Double prixVente;
-    @Column(name = "dateReaprovisonnementFournisseur")
-    private LocalDate dateReaprovisonnementFournisseur;
+    @Column(name = "dateReaprovisionnementFournisseur")
+    private LocalDate dateReaprovisionnementFournisseur;
     @Column(name = "quantiteEnStock")
     private Integer quantiteEnStock;
 
@@ -40,12 +40,12 @@ public class Produit {
     public Produit() {
     }
 
-    public Produit(String nom, String code, Double prixAchat, Double prixVente, LocalDate dateReaprovisonnementFournisseur, Integer quantiteEnStock) {
+    public Produit(String nom, String code, Double prixAchat, Double prixVente, LocalDate dateReaprovisionnementFournisseur, Integer quantiteEnStock) {
         this.nom = nom;
         this.code = code;
         this.prixAchat = prixAchat;
         this.prixVente = prixVente;
-        this.dateReaprovisonnementFournisseur = dateReaprovisonnementFournisseur;
+        this.dateReaprovisionnementFournisseur = dateReaprovisionnementFournisseur;
         this.quantiteEnStock = quantiteEnStock;
     }
 
@@ -89,12 +89,12 @@ public class Produit {
         this.prixVente = prixVente;
     }
 
-    public LocalDate getDateReaprovisonnementFournisseur() {
-        return dateReaprovisonnementFournisseur;
+    public LocalDate getDateReaprovisionnementFournisseur() {
+        return dateReaprovisionnementFournisseur;
     }
 
-    public void setDateReaprovisonnementFournisseur(LocalDate dateReaprovisonnementFournisseur) {
-        this.dateReaprovisonnementFournisseur = dateReaprovisonnementFournisseur;
+    public void setDateReaprovisionnementFournisseur(LocalDate dateReaprovisionnementFournisseur) {
+        this.dateReaprovisionnementFournisseur = dateReaprovisionnementFournisseur;
     }
 
     public Integer getQuantiteEnStock() {
@@ -137,7 +137,7 @@ public class Produit {
         sb.append(", code='").append(code).append('\'');
         sb.append(", prixAchat=").append(prixAchat);
         sb.append(", prixVente=").append(prixVente);
-        sb.append(", dateReaprovisonnementFournisseur=").append(dateReaprovisonnementFournisseur);
+        sb.append(", dateReaprovisionnementFournisseur=").append(dateReaprovisionnementFournisseur);
         sb.append(", quantiteEnStock=").append(quantiteEnStock);
         sb.append(", famille=").append(famille);
         sb.append(", fournisseur=").append(fournisseur);
