@@ -155,18 +155,17 @@ INSERT INTO `fournisseur` (`id`, `nom`) VALUES
 
 CREATE TABLE `fraisdeport` (
   `id` int(11) NOT NULL,
-  `montant` decimal(10,0) NOT NULL,
-  `idPays` int(11) NOT NULL
+  `montant` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `fraisdeport`
 --
 
-INSERT INTO `fraisdeport` (`id`, `montant`, `idPays`) VALUES
-(1, '0', 1),
-(2, '5', 3),
-(3, '2', 2);
+INSERT INTO `fraisdeport` (`id`, `montant`) VALUES
+(1, '0'),
+(2, '5'),
+(3, '2');
 
 -- --------------------------------------------------------
 
@@ -196,17 +195,18 @@ INSERT INTO `modepaiement` (`id`, `nom`) VALUES
 CREATE TABLE `pays` (
   `id` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL,
-  `dureeLivraison` int(11) NOT NULL
+  `dureeLivraison` int(11) NOT NULL,
+  `idFraisDePort` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `pays`
 --
 
-INSERT INTO `pays` (`id`, `nom`, `dureeLivraison`) VALUES
-(1, 'France', 2),
-(2, 'Italie', 5),
-(3, 'Espagne', 4);
+INSERT INTO `pays` (`id`, `nom`, `dureeLivraison`, `idFraisDePort`) VALUES
+(1, 'France', 2, 1),
+(2, 'Italie', 5, 2),
+(3, 'Espagne', 4, 3);
 
 -- --------------------------------------------------------
 
@@ -223,6 +223,8 @@ CREATE TABLE `produit` (
   `prixVente` decimal(10,0) NOT NULL,
   `idFournisseur` int(11) NOT NULL,
   `dateReaprovisionnementFournisseur` date DEFAULT NULL,
+  dateReaprovisionnementFournisseur
+  dateReaprovisonnementFournisseur
   `quantiteEnStock` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -331,8 +333,7 @@ ALTER TABLE `fournisseur`
 -- Indexes for table `fraisdeport`
 --
 ALTER TABLE `fraisdeport`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idPays` (`idPays`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `modepaiement`
@@ -464,11 +465,6 @@ ALTER TABLE `commandeproduit`
   ADD CONSTRAINT `commandeproduit_ibfk_1` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`id`),
   ADD CONSTRAINT `commandeproduit_ibfk_2` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`id`);
 
---
--- Constraints for table `fraisdeport`
---
-ALTER TABLE `fraisdeport`
-  ADD CONSTRAINT `fraisdeport_ibfk_1` FOREIGN KEY (`idPays`) REFERENCES `pays` (`id`);
 
 --
 -- Constraints for table `produit`

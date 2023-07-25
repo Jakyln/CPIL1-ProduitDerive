@@ -26,8 +26,6 @@ public class Utilisateur {
     @ManyToOne
     @JoinColumn(name="idRole")
     private Role role;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateur", cascade = CascadeType.ALL)
-    private List<Commande> commandes;
 
     public Utilisateur() {
     }
@@ -86,14 +84,6 @@ public class Utilisateur {
         this.role = role;
     }
 
-    public List<Commande> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(List<Commande> commandes) {
-        this.commandes = commandes;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Utilisateur{");
@@ -103,7 +93,6 @@ public class Utilisateur {
         sb.append(", adresse=").append(adresse);
         sb.append(", pays=").append(pays);
         sb.append(", role=").append(role);
-        sb.append(", commandes=").append(commandes);
         sb.append('}');
         return sb.toString();
     }

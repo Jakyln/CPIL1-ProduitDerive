@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface ProduitDAO extends JpaRepository<Produit, Long> {
-//    List<Produit> find
 }

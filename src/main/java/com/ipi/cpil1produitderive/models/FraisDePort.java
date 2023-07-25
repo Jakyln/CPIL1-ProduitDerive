@@ -14,10 +14,6 @@ public class FraisDePort {
     @Column(name = "montant")
     private Double montant;
 
-    @OneToOne
-    @JoinColumn(name = "idPays")
-    private Pays pays;
-
     public FraisDePort() {
     }
 
@@ -42,20 +38,12 @@ public class FraisDePort {
         this.montant = montant;
     }
 
-    public Pays getPays() {
-        return pays;
-    }
-
-    public void setPays(Pays pays) {
-        this.pays = pays;
-    }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FraisDePort{");
         sb.append("id=").append(id);
         sb.append(", montant=").append(montant);
-        sb.append(", pays=").append(pays);
         sb.append('}');
         return sb.toString();
     }
