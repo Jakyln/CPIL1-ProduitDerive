@@ -13,16 +13,24 @@ public class Produit {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nom")
     private String nom;
+    @Column(name = "code")
     private String code;
+    @Column(name = "prixAchat")
     private Double prixAchat;
+    @Column(name = "prixVente")
     private Double prixVente;
+    @Column(name = "dateReaprovisonnementFournisseur")
     private LocalDate dateReaprovisonnementFournisseur;
+    @Column(name = "quantiteEnStock")
     private Integer quantiteEnStock;
 
     @ManyToOne
+    @JoinColumn(name = "idFamille")
     private Famille famille;
     @ManyToOne
+    @JoinColumn(name = "idFournisseur")
     private Fournisseur fournisseur;
 
     @OneToMany(mappedBy = "produit")

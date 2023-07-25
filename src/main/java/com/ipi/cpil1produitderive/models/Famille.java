@@ -12,7 +12,9 @@ public class Famille {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nom")
     private String nom;
+    @Column(name = "code")
     private String code;
 
     @OneToMany(mappedBy = "famille")

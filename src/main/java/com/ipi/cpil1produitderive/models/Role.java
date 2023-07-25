@@ -12,6 +12,7 @@ public class Role {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nom")
     private String nom;
 
     @OneToMany(mappedBy = "role")

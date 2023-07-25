@@ -12,7 +12,9 @@ public class Utilisateur {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name="email")
     private String email;
+    @Column(name="motDePasse")
     private String motDePasse;
     @ManyToOne
     @JoinColumn(name="idAdresse")

@@ -10,11 +10,14 @@ public class CommandeProduit {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "quantite")
     private Integer quantite;
 
     @ManyToOne
+    @JoinColumn(name = "idCommande")
     private Commande commande;
     @ManyToOne
+    @JoinColumn(name = "idProduit")
     private Produit produit;
 
     public CommandeProduit() {

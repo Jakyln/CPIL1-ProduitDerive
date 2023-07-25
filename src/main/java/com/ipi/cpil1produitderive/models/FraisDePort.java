@@ -10,9 +10,11 @@ public class FraisDePort {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "montant")
     private Double montant;
 
     @OneToOne
+    @JoinColumn(name = "idPays")
     private Pays pays;
 
     public FraisDePort() {

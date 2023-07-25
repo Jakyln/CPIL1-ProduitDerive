@@ -10,10 +10,13 @@ public class Pays {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nom")
     private String nom;
+    @Column(name = "dureeLivraison")
     private Integer dureeLivraison;
 
     @OneToOne
+    @JoinColumn(name = "idFraisDePort")
     private FraisDePort fraisDePort;
 
     public Pays() {

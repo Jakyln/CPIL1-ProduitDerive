@@ -10,6 +10,7 @@ public class ModePaiement {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nom")
     private String nom;
 
     public ModePaiement() {
