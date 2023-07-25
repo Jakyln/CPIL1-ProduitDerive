@@ -12,6 +12,7 @@ import jdk.jshell.execution.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,39 +25,15 @@ public class CommandeService {
     @Autowired
     private CommandeProduitDAO commandeProduitDAO;
 
-    public double getSumPrixAchatCommandeOnline(){
-        /*double sumCommandeOnline = 0d;
-
-        List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
-        for (Utilisateur utilisateur : utilisateurs) {
-            List<Commande> commandes = utilisateur.getCommandes();
-            for (Commande commande : commandes) {
-                if(commande.getPurchasedOnline()){
-                    List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                    for (CommandeProduit commandeProduit : commandeProduits) {
-                        sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
-                    }
-                }
-            }
-        }
-        return sumCommandeOnline;*/
-        return commandeProduitDAO.getSumOfCommandeOnline();
-    }
-
-    public double getSumPrixAchatCommandeOnlineOfProduit(Produit produit){
+    public double getSumPrixAchatOfCommandeOnline(){
         double sumCommandeOnline = 0d;
 
-        List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
-        for (Utilisateur utilisateur : utilisateurs) {
-            List<Commande> commandes = utilisateur.getCommandes();
-            for (Commande commande : commandes) {
-                if(commande.getPurchasedOnline()){
-                    List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                    for (CommandeProduit commandeProduit : commandeProduits) {
-                        if(commandeProduit.getProduit().equals(produit)){
-                            sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
-                        }
-                    }
+        List<Commande> commandes = commandeDAO.findAll();
+        for (Commande commande : commandes) {
+            if(commande.getPurchasedOnline()){
+                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
+                for (CommandeProduit commandeProduit : commandeProduits) {
+                    sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
                 }
             }
         }
@@ -64,38 +41,30 @@ public class CommandeService {
     }
 
 
-    public double getSumPrixVenteCommandeOnline(){
-        double sumCommandeOnline = 0d;
+    public double getSumPrixVenteOfCommandeOnline(){
+        double sumCommandeNotOnline = 0d;
 
-        List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
-        for (Utilisateur utilisateur : utilisateurs) {
-            List<Commande> commandes = utilisateur.getCommandes();
-            for (Commande commande : commandes) {
-                if(commande.getPurchasedOnline()){
-                    List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                    for (CommandeProduit commandeProduit : commandeProduits) {
-                        sumCommandeOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
-                    }
+        List<Commande> commandes = commandeDAO.findAll();
+        for (Commande commande : commandes) {
+            if(commande.getPurchasedOnline()){
+                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
+                for (CommandeProduit commandeProduit : commandeProduits) {
+                    sumCommandeNotOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
                 }
             }
         }
-        return sumCommandeOnline;
+        return sumCommandeNotOnline;
     }
 
-    public double getSumPrixVenteCommandeOnlineOfProduit(Produit produit){
+    public double getSumPrixAchatOfCommandeNotOnline(){
         double sumCommandeOnline = 0d;
 
-        List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
-        for (Utilisateur utilisateur : utilisateurs) {
-            List<Commande> commandes = utilisateur.getCommandes();
-            for (Commande commande : commandes) {
-                if(commande.getPurchasedOnline()){
-                    List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                    for (CommandeProduit commandeProduit : commandeProduits) {
-                        if(commandeProduit.getProduit().equals(produit)){
-                            sumCommandeOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
-                        }
-                    }
+        List<Commande> commandes = commandeDAO.findAll();
+        for (Commande commande : commandes) {
+            if(!commande.getPurchasedOnline()){
+                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
+                for (CommandeProduit commandeProduit : commandeProduits) {
+                    sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
                 }
             }
         }
@@ -103,81 +72,18 @@ public class CommandeService {
     }
 
 
+    public double getSumPrixVenteOfCommandeNotOnline(){
+        double sumCommandeNotOnline = 0d;
 
-    public double getSumPrixAchatCommandeOffline(){
-        double sumCommandeOnline = 0d;
-
-        List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
-        for (Utilisateur utilisateur : utilisateurs) {
-            List<Commande> commandes = utilisateur.getCommandes();
-            for (Commande commande : commandes) {
-                if(!commande.getPurchasedOnline()){
-                    List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                    for (CommandeProduit commandeProduit : commandeProduits) {
-                        sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
-                    }
+        List<Commande> commandes = commandeDAO.findAll();
+        for (Commande commande : commandes) {
+            if(!commande.getPurchasedOnline()){
+                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
+                for (CommandeProduit commandeProduit : commandeProduits) {
+                    sumCommandeNotOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
                 }
             }
         }
-        return sumCommandeOnline;
-    }
-
-    public double getSumPrixAchatCommandeOfflineOfProduit(Produit produit){
-        double sumCommandeOnline = 0d;
-
-        List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
-        for (Utilisateur utilisateur : utilisateurs) {
-            List<Commande> commandes = utilisateur.getCommandes();
-            for (Commande commande : commandes) {
-                if(!commande.getPurchasedOnline()){
-                    List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                    for (CommandeProduit commandeProduit : commandeProduits) {
-                        if(commandeProduit.getProduit().equals(produit)){
-                            sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
-                        }
-                    }
-                }
-            }
-        }
-        return sumCommandeOnline;
-    }
-
-
-    public double getSumPrixVenteCommandeOffline(){
-        double sumCommandeOnline = 0d;
-
-        List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
-        for (Utilisateur utilisateur : utilisateurs) {
-            List<Commande> commandes = utilisateur.getCommandes();
-            for (Commande commande : commandes) {
-                if(!commande.getPurchasedOnline()){
-                    List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                    for (CommandeProduit commandeProduit : commandeProduits) {
-                        sumCommandeOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
-                    }
-                }
-            }
-        }
-        return sumCommandeOnline;
-    }
-
-    public double getSumPrixVenteCommandeOfflineOfProduit(Produit produit){
-        double sumCommandeOnline = 0d;
-
-        List<Utilisateur> utilisateurs = utilisateurDAO.findAll();
-        for (Utilisateur utilisateur : utilisateurs) {
-            List<Commande> commandes = utilisateur.getCommandes();
-            for (Commande commande : commandes) {
-                if(commande.getPurchasedOnline()){
-                    List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                    for (CommandeProduit commandeProduit : commandeProduits) {
-                        if(!commandeProduit.getProduit().equals(produit)){
-                            sumCommandeOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
-                        }
-                    }
-                }
-            }
-        }
-        return sumCommandeOnline;
+        return sumCommandeNotOnline;
     }
 }
