@@ -27,16 +27,22 @@ public class CommandeService {
 
     public double getSumPrixAchatOfCommandeOnline(){
         double sumCommandeOnline = 0d;
-
-        List<Commande> commandes = commandeDAO.findAll();
-        for (Commande commande : commandes) {
-            if(commande.getPurchasedOnline()){
-                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                for (CommandeProduit commandeProduit : commandeProduits) {
-                    sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
+        List<Utilisateur> utilisateurs;
+        utilisateurs = utilisateurDAO.findAll();
+        for (Utilisateur utilisateur : utilisateurs) {
+            List<Commande> commandes = commandeDAO.findAllByUtilisateur(utilisateur);
+            System.out.println("commandes :" + commandes);
+            for (Commande commande : commandes) {
+                if(commande.getPurchasedOnline()){
+                    List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
+                    for (CommandeProduit commandeProduit : commandeProduits) {
+                        sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
+                    }
                 }
             }
         }
+
+
         return sumCommandeOnline;
     }
 

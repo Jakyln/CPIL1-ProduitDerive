@@ -8,19 +8,20 @@ import java.util.List;
 public class Utilisateur {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     private String email;
     private String motDePasse;
-//    @Column(name = "idAdresse")
     @ManyToOne
+    @JoinColumn(name="idAdresse")
     private Adresse adresse;
-//    @Column(name = "idPays")
     @ManyToOne
+    @JoinColumn(name="idPays")
     private Pays pays;
-//    @Column(name = "idRole")
     @ManyToOne
+    @JoinColumn(name="idRole")
     private Role role;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private List<Commande> commandes;

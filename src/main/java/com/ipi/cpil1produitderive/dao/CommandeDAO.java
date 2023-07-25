@@ -15,6 +15,9 @@ public interface CommandeDAO extends JpaRepository<Commande, Long> {
     @Query(value = "SELECT c FROM Commande c WHERE c.utilisateur = :utilisateur ")
     List<Commande> findAllByUtilisateur(Utilisateur utilisateur);
 
+    @Query(value = "SELECT c FROM Commande c")
+    List<Commande> findAll();
+
 
 
 }

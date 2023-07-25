@@ -6,14 +6,19 @@ import jakarta.persistence.*;
 public class Adresse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "rue")
     private String rue;
+    @Column(name = "codePostal")
     private String codePostal;
+    @Column(name = "ville")
     private String ville;
 
     @ManyToOne
+    @JoinColumn(name="idPays")
     private Pays pays;
 
     public Adresse() {
