@@ -28,10 +28,8 @@ public class CommandeService {
     public double getSumPrixAchatOfCommandeOnline(){
         double sumCommandeOnline = 0d;
         List<Commande> commandes = commandeDAO.findAll();
-        System.out.println("commandes :" + commandes);
         for (Commande commande : commandes) {
             if(commande.getPurchasedOnline()){
-
                 List<CommandeProduit> commandeProduits = commandeProduitDAO.findAllByCommande(commande);
                 for (CommandeProduit commandeProduit : commandeProduits) {
                     sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
@@ -50,7 +48,7 @@ public class CommandeService {
         List<Commande> commandes = commandeDAO.findAll();
         for (Commande commande : commandes) {
             if(commande.getPurchasedOnline()){
-                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
+                List<CommandeProduit> commandeProduits = commandeProduitDAO.findAllByCommande(commande);
                 for (CommandeProduit commandeProduit : commandeProduits) {
                     sumCommandeNotOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
                 }
@@ -65,7 +63,7 @@ public class CommandeService {
         List<Commande> commandes = commandeDAO.findAll();
         for (Commande commande : commandes) {
             if(!commande.getPurchasedOnline()){
-                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
+                List<CommandeProduit> commandeProduits = commandeProduitDAO.findAllByCommande(commande);
                 for (CommandeProduit commandeProduit : commandeProduits) {
                     sumCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
                 }
@@ -81,7 +79,7 @@ public class CommandeService {
         List<Commande> commandes = commandeDAO.findAll();
         for (Commande commande : commandes) {
             if(!commande.getPurchasedOnline()){
-                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
+                List<CommandeProduit> commandeProduits = commandeProduitDAO.findAllByCommande(commande);
                 for (CommandeProduit commandeProduit : commandeProduits) {
                     sumCommandeNotOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
                 }

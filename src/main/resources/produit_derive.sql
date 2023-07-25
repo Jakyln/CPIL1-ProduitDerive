@@ -69,8 +69,8 @@ CREATE TABLE `commande` (
 --
 
 INSERT INTO `commande` (`id`, `idUtilisateur`, `idModePaiement`, `dateLivraison`, `dateCommande`, `isPurchasedOnline`, `idAdresseFacturation`, `idAdresseLivraison`, `isValide`) VALUES
-(1, 1, 2, '2023-02-12', '2023-02-12 13:00:10', 0, NULL, NULL, 1),
-(2, 2, 2, '2023-02-12', '2023-02-12 16:35:12', 0, NULL, NULL, 1),
+(1, 1, 2, '2023-02-12', '2023-02-12 13:00:10', 0, 1, 1, 1),
+(2, 2, 2, '2023-02-12', '2023-02-12 16:35:12', 0, 2, 4, 1),
 (3, 3, 1, '2023-02-25', '2023-03-05 10:50:50', 1, 2, 2, 1),
 (4, 4, 1, '2023-02-24', '2023-03-03 15:05:54', 1, 2, 3, 1),
 (5, 4, 2, '2023-02-28', '2023-03-07 17:12:35', 1, 3, 3, 0);
@@ -223,8 +223,6 @@ CREATE TABLE `produit` (
   `prixVente` decimal(10,0) NOT NULL,
   `idFournisseur` int(11) NOT NULL,
   `dateReaprovisionnementFournisseur` date DEFAULT NULL,
-  dateReaprovisionnementFournisseur
-  dateReaprovisonnementFournisseur
   `quantiteEnStock` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -233,11 +231,11 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id`, `nom`, `code`, `idFamille`, `prixAchat`, `prixVente`, `idFournisseur`, `dateReaprovisionnementFournisseur`, `quantiteEnStock`) VALUES
-(1, 'Figurine Lol', 'FGILOL', 1, '7', '20', 1, NULL, 10000),
-(2, 'Figurine Star Wars', 'FIGSTW', 1, '11', '25', 1, NULL, 4000),
-(3, 'Figurine Assassin\'s Creed', 'FIGASC', 1, '9', '22', 1, NULL, 15000),
-(4, 'Mini jeu Tetris', 'MINTET', 2, '3', '10', 2, '0000-00-00', 500),
-(5, 'Mini jeu Pac-Man', 'MINPAC', 2, '3', '10', 2, '0000-00-00', 29);
+(1, 'Figurine Lol', 'FGILOL', 1, '7', '20', 1, '2023-02-02', 10000),
+(2, 'Figurine Star Wars', 'FIGSTW', 1, '11', '25', 1, '2023-02-03', 4000),
+(3, 'Figurine Assassin\'s Creed', 'FIGASC', 1, '9', '22', 1, '2023-02-04', 15000),
+(4, 'Mini jeu Tetris', 'MINTET', 2, '3', '10', 2, '2023-02-05', 500),
+(5, 'Mini jeu Pac-Man', 'MINPAC', 2, '3', '10', 2, '2023-02-06', 29);
 
 -- --------------------------------------------------------
 
