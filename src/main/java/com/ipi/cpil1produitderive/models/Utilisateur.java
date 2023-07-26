@@ -13,14 +13,16 @@ public class Utilisateur {
 
     private String email;
     private String motDePasse;
-
+//    @Column(name = "idAdresse")
     @ManyToOne
     private Adresse adresse;
+//    @Column(name = "idPays")
     @ManyToOne
     private Pays pays;
+//    @Column(name = "idRole")
     @ManyToOne
     private Role role;
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private List<Commande> commandes;
 
     public Utilisateur() {

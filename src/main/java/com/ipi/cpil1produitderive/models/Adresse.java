@@ -19,8 +19,7 @@ public class Adresse {
     public Adresse() {
     }
 
-    public Adresse(Long id, String rue, String codePostal, String ville) {
-        this.id = id;
+    public Adresse(String rue, String codePostal, String ville) {
         this.rue = rue;
         this.codePostal = codePostal;
         this.ville = ville;
