@@ -1,8 +1,10 @@
 package com.ipi.cpil1produitderive.controllers;
 
 import com.ipi.cpil1produitderive.pojo.VentesFamille;
+import com.ipi.cpil1produitderive.pojo.VentesProduit;
 import com.ipi.cpil1produitderive.services.CommandeService;
 import com.ipi.cpil1produitderive.services.FamilleService;
+import com.ipi.cpil1produitderive.services.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -18,6 +20,9 @@ public class ConsoleController {
 
     @Autowired
     FamilleService familleService;
+
+    @Autowired
+    ProduitService produitService;
 
 
     public void printConsoleApp() throws Exception {
@@ -45,8 +50,7 @@ public class ConsoleController {
                 break;
 
             case 3 :
-                break;
-            case 4 :
+                valueToReturnToMenu = this.printPageProduit();
                 break;
         }
         if(valueToReturnToMenu == 1){
@@ -104,6 +108,44 @@ public class ConsoleController {
             System.out.println("Code: " + ventesFamille.getFamille().getCode());
             System.out.println("Nombre de produits: " + ventesFamille.getFamille().getProduits().size());
             System.out.println("Nombre vendu: " + ventesFamille.getQuantiteVendu());
+
+            System.out.println("----------------------------------------------------------------");
+            //TODO check les données comparé a BDD, rendre plus beau affichage
+        }
+        System.out.println();
+
+        Scanner scannerToExit = new Scanner(System.in);
+        System.out.println("(1) Retour au menu ");
+
+        System.out.print("Rentrer dans la page :");
+
+        return scannerToExit.nextInt();
+    }
+    public int printPageProduit() throws Exception {
+
+        List<VentesProduit> ventesProduits = produitService.getAllVentesProduit();
+
+        for (int i = 0; i < 30; i++) {
+            System.out.println();
+        }
+
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("\tPAGE (1) STATISTIQUES COMMANDES");
+        System.out.println("----------------------------------------------------------------");
+
+        //System.out.printf("| %-20s | %-8s | %8s |%n", "", "Nom", "Code","Nombre de produits","Nombre vendu");
+
+        for (VentesProduit ventesProduit : ventesProduits) {
+            /*System.out.printf("| %-20s | %-8s | %-8s |%n", "SOMME DE PRIX D'ACHAT",
+                    ventesFamille.getFamille().getNom(),
+                    ventesFamille.getFamille().getCode(),
+                    ventesFamille.getFamille().getProduits().size(),
+                    ventesFamille.getQuantiteVendu() );*/
+            System.out.println("Nom: " + ventesProduit.getProduit().getNom());
+            System.out.println("Code: " + ventesProduit.getProduit().getCode());
+            System.out.println("Famille: " + ventesProduit.getProduit().getFamille().getNom());
+            System.out.println("Quantite Vendus: " + ventesProduit.getQuantiteVendu());
+            System.out.println("Somme total des commandes : " + ventesProduit.getPrixTotal());
 
             System.out.println("----------------------------------------------------------------");
             //TODO check les données comparé a BDD, rendre plus beau affichage
