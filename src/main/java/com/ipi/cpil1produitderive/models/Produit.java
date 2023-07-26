@@ -24,7 +24,7 @@ public class Produit {
     @ManyToOne
     private Fournisseur fournisseur;
 
-    @OneToMany(mappedBy = "produit")
+    @OneToMany(mappedBy = "produit", fetch = FetchType.EAGER)
     private List<CommandeProduit> commandeProduits;
 
     public Produit() {

@@ -14,7 +14,7 @@ public class Famille {
     private String nom;
     private String code;
 
-    @OneToMany(mappedBy = "famille")
+    @OneToMany(mappedBy = "famille", fetch = FetchType.EAGER)
     private List<Produit> produits;
 
     public Famille() {
