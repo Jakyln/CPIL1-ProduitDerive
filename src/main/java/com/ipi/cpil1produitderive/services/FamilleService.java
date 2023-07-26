@@ -32,32 +32,10 @@ public class FamilleService {
      * @return VenteByFamille
      */
     public VentesFamille getVentesFamille(Long familleId) throws Exception{
-        //List<VenteByFamille> venteByFamilleList = new ArrayList<>();
         Integer quantiteVenduFamille = 0;
         Integer quantiteVenduProduit = 0;
         Double prixTotalFamille = 0.0;
-        //List<Famille> familles = familleDAO.findAll();
         Famille famille = findById(familleId);
-        /*for (Famille famille: familles) {
-            quantiteVenduFamille = 0;
-            prixTotalFamille = 0.0;
-            List<Produit> produits = famille.getProduits();
-            for (Produit produit: produits){
-                quantiteVenduProduit = 0;
-                List<CommandeProduit> commandeProduits = produit.getCommandeProduits();
-                for (CommandeProduit commandeProduit: commandeProduits){
-                    if (commandeProduit.getCommande().getValide()){
-                        quantiteVenduFamille += commandeProduit.getQuantite();
-                        quantiteVenduProduit += commandeProduit.getQuantite();
-                    }
-                }
-                prixTotalFamille += produit.getPrixVente() * quantiteVenduProduit;
-            }
-            // ajout ligne
-            VenteByFamille venteByFamille = new VenteByFamille(famille, quantiteVenduFamille, prixTotalFamille);
-            venteByFamilleList.add(venteByFamille);
-
-        }*/
         List<Produit> produits = famille.getProduits();
         for (Produit produit : produits) {
             quantiteVenduProduit = 0;
