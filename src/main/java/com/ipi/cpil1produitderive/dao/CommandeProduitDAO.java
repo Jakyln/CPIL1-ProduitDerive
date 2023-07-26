@@ -1,16 +1,21 @@
 package com.ipi.cpil1produitderive.dao;
 
 import com.ipi.cpil1produitderive.models.Adresse;
+import com.ipi.cpil1produitderive.models.Commande;
 import com.ipi.cpil1produitderive.models.CommandeProduit;
 import com.ipi.cpil1produitderive.models.Produit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CommandeProduitDAO extends JpaRepository<CommandeProduit, Long> {
+    @Query(value = "SELECT c FROM commandeProduit c WHERE c.commande = :commande")
+    List<CommandeProduit> findAllByCommande(Commande commande);
     //Chiffre d'affaires
-    @Query(value = "SELECT " +
+    /*@Query(value = "SELECT " +
             "SUM(commandeproduit.quantite * produit.prixAchat) " +
             "FROM commandeproduit " +
             "INNER JOIN produit " +
@@ -93,5 +98,5 @@ public interface CommandeProduitDAO extends JpaRepository<CommandeProduit, Long>
             "ON commandeproduit.idCommande = commande.id " +
             "WHERE commande.isPurchasedOnline = 0 " +
             "AND commandeproduit.idProduit = ?", nativeQuery = true)
-    Double getSumPrixVenteOfCommandeOfflineOfProduit(long idProduit);
+    Double getSumPrixVenteOfCommandeOfflineOfProduit(long idProduit);*/
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3308
--- Generation Time: Apr 07, 2023 at 09:13 AM
+-- Generation Time: Jul 25, 2023 at 08:59 AM
 -- Server version: 10.6.9-MariaDB-log
 -- PHP Version: 7.3.2
 
@@ -69,8 +69,8 @@ CREATE TABLE `commande` (
 --
 
 INSERT INTO `commande` (`id`, `idUtilisateur`, `idModePaiement`, `dateLivraison`, `dateCommande`, `isPurchasedOnline`, `idAdresseFacturation`, `idAdresseLivraison`, `isValide`) VALUES
-(1, 1, 2, '2023-02-12', '2023-02-12 13:00:10', 0, NULL, NULL, 1),
-(2, 2, 2, '2023-02-12', '2023-02-12 16:35:12', 0, NULL, NULL, 1),
+(1, 1, 2, '2023-02-12', '2023-02-12 13:00:10', 0, 1, 1, 1),
+(2, 2, 2, '2023-02-12', '2023-02-12 16:35:12', 0, 2, 4, 1),
 (3, 3, 1, '2023-02-25', '2023-03-05 10:50:50', 1, 2, 2, 1),
 (4, 4, 1, '2023-02-24', '2023-03-03 15:05:54', 1, 2, 3, 1),
 (5, 4, 2, '2023-02-28', '2023-03-07 17:12:35', 1, 3, 3, 0);
@@ -155,18 +155,17 @@ INSERT INTO `fournisseur` (`id`, `nom`) VALUES
 
 CREATE TABLE `fraisdeport` (
   `id` int(11) NOT NULL,
-  `montant` decimal(10,0) NOT NULL,
-  `idPays` int(11) NOT NULL
+  `montant` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `fraisdeport`
 --
 
-INSERT INTO `fraisdeport` (`id`, `montant`, `idPays`) VALUES
-(1, '0', 1),
-(2, '5', 3),
-(3, '2', 2);
+INSERT INTO `fraisdeport` (`id`, `montant`) VALUES
+(1, '0'),
+(2, '5'),
+(3, '2');
 
 -- --------------------------------------------------------
 
@@ -196,17 +195,18 @@ INSERT INTO `modepaiement` (`id`, `nom`) VALUES
 CREATE TABLE `pays` (
   `id` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL,
-  `dureeLivraison` int(11) NOT NULL
+  `dureeLivraison` int(11) NOT NULL,
+  `idFraisDePort` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `pays`
 --
 
-INSERT INTO `pays` (`id`, `nom`, `dureeLivraison`) VALUES
-(1, 'France', 2),
-(2, 'Italie', 5),
-(3, 'Espagne', 4);
+INSERT INTO `pays` (`id`, `nom`, `dureeLivraison`, `idFraisDePort`) VALUES
+(1, 'France', 2, 1),
+(2, 'Italie', 5, 2),
+(3, 'Espagne', 4, 3);
 
 -- --------------------------------------------------------
 
@@ -231,11 +231,11 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id`, `nom`, `code`, `idFamille`, `prixAchat`, `prixVente`, `idFournisseur`, `dateReaprovisionnementFournisseur`, `quantiteEnStock`) VALUES
-(1, 'Figurine Lol', 'FGILOL', 1, '7', '20', 1, NULL, 10000),
-(2, 'Figurine Star Wars', 'FIGSTW', 1, '11', '25', 1, NULL, 4000),
-(3, 'Figurine Assassin\'s Creed', 'FIGASC', 1, '9', '22', 1, NULL, 15000),
-(4, 'Mini jeu Tetris', 'MINTET', 2, '3', '10', 2, '0000-00-00', 500),
-(5, 'Mini jeu Pac-Man', 'MINPAC', 2, '3', '10', 2, '0000-00-00', 29);
+(1, 'Figurine Lol', 'FGILOL', 1, '7', '20', 1, '2023-02-02', 10000),
+(2, 'Figurine Star Wars', 'FIGSTW', 1, '11', '25', 1, '2023-02-03', 4000),
+(3, 'Figurine Assassin\'s Creed', 'FIGASC', 1, '9', '22', 1, '2023-02-04', 15000),
+(4, 'Mini jeu Tetris', 'MINTET', 2, '3', '10', 2, '2023-02-05', 500),
+(5, 'Mini jeu Pac-Man', 'MINPAC', 2, '3', '10', 2, '2023-02-06', 29);
 
 -- --------------------------------------------------------
 
@@ -269,7 +269,11 @@ CREATE TABLE `utilisateur` (
   `motDePasse` varchar(20) NOT NULL,
   `idAdresse` int(11) NOT NULL,
   `idPays` int(11) NOT NULL,
-  `idRole` int(11) NOT NULL
+  `idRole` int(11) NOT NULL,
+  `mot_de_passe` varchar(255) DEFAULT NULL,
+  `adresse_id` bigint(20) DEFAULT NULL,
+  `pays_id` bigint(20) DEFAULT NULL,
+  `role_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -327,8 +331,7 @@ ALTER TABLE `fournisseur`
 -- Indexes for table `fraisdeport`
 --
 ALTER TABLE `fraisdeport`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idPays` (`idPays`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `modepaiement`
@@ -460,11 +463,6 @@ ALTER TABLE `commandeproduit`
   ADD CONSTRAINT `commandeproduit_ibfk_1` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`id`),
   ADD CONSTRAINT `commandeproduit_ibfk_2` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`id`);
 
---
--- Constraints for table `fraisdeport`
---
-ALTER TABLE `fraisdeport`
-  ADD CONSTRAINT `fraisdeport_ibfk_1` FOREIGN KEY (`idPays`) REFERENCES `pays` (`id`);
 
 --
 -- Constraints for table `produit`

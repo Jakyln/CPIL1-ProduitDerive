@@ -74,8 +74,8 @@ public class ConsoleController {
         double sumPrixAchatCommandeOnline = commandeService.getSumPrixAchatOfCommandeOnline();
         double sumPrixVenteOfCommandeOnline = commandeService.getSumPrixVenteOfCommandeOnline();
 
-        double sumPrixAchatOfCommandeOffline = commandeService.getSumPrixAchatOfCommandeOffline();
-        double sumPrixVenteOfCommandeOffline = commandeService.getSumPrixVenteOfCommandeOffline();
+        double sumPrixAchatOfCommandeNotOnline = commandeService.getSumPrixAchatOfCommandeNotOnline();
+        double sumPrixVenteOfCommandeNotOnline = commandeService.getSumPrixVenteOfCommandeNotOnline();
 
 
         for (int i = 0; i < 30; i++) {
@@ -88,8 +88,8 @@ public class ConsoleController {
 
         System.out.printf("| %-20s | %-8s | %8s |%n", "", "SUR PLACE", "EN LIGNE");
         System.out.println("----------------------------------------------------------------");
-        System.out.printf("| %-20s | %-8s | %-8s |%n", "SOMME DE PRIX D'ACHAT", sumPrixAchatOfCommandeOffline, sumPrixAchatCommandeOnline );
-        System.out.printf("| %-20s | %-8s | %-8s |%n", "SOMME DE PRIX DE VENTE", sumPrixVenteOfCommandeOffline, sumPrixVenteOfCommandeOnline );
+        System.out.printf("| %-20s | %-8s | %-8s |%n", "SOMME DE PRIX D'ACHAT", sumPrixAchatOfCommandeNotOnline, sumPrixAchatCommandeOnline );
+        System.out.printf("| %-20s | %-8s | %-8s |%n", "SOMME DE PRIX DE VENTE", sumPrixVenteOfCommandeNotOnline, sumPrixVenteOfCommandeOnline );
         System.out.println("----------------------------------------------------------------");
         System.out.println();
 
