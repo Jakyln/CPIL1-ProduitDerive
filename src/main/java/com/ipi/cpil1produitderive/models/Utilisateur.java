@@ -4,26 +4,28 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
+@Entity(name = "utilisateur")
+@Table(name = "utilisateur", schema = "produit_derive", catalog = "produit_derive")
 public class Utilisateur {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name="email")
     private String email;
+    @Column(name="motDePasse")
     private String motDePasse;
-//    @Column(name = "idAdresse")
     @ManyToOne
+    @JoinColumn(name="idAdresse")
     private Adresse adresse;
-//    @Column(name = "idPays")
     @ManyToOne
+    @JoinColumn(name="idPays")
     private Pays pays;
-//    @Column(name = "idRole")
     @ManyToOne
+    @JoinColumn(name="idRole")
     private Role role;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateur", cascade = CascadeType.ALL)
-    private List<Commande> commandes;
 
     public Utilisateur() {
     }
@@ -82,14 +84,6 @@ public class Utilisateur {
         this.role = role;
     }
 
-    public List<Commande> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(List<Commande> commandes) {
-        this.commandes = commandes;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Utilisateur{");
@@ -99,7 +93,6 @@ public class Utilisateur {
         sb.append(", adresse=").append(adresse);
         sb.append(", pays=").append(pays);
         sb.append(", role=").append(role);
-        sb.append(", commandes=").append(commandes);
         sb.append('}');
         return sb.toString();
     }
