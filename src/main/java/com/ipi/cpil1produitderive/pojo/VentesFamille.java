@@ -15,4 +15,28 @@ public class VentesFamille {
         this.quantiteVendu = quantiteVendu;
         this.prixTotal = prixTotal;
     }
+
+    public Famille getFamille() {
+        return famille;
+    }
+
+    public void setFamille(Famille famille) {
+        this.famille = famille;
+    }
+
+    public Integer getQuantiteVendu() {
+        return quantiteVendu;
+    }
+
+    public void setQuantiteVendu(Integer quantiteVendu) {
+        this.quantiteVendu = quantiteVendu;
+    }
+
+    public Double getPrixTotal() {
+        return prixTotal;
+    }
+
+    public void setPrixTotal(Double prixTotal) {
+        this.prixTotal = prixTotal;
+    }
 }
