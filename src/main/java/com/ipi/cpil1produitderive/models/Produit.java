@@ -34,7 +34,7 @@ public class Produit {
     @JoinColumn(name = "idFournisseur")
     private Fournisseur fournisseur;
 
-    @OneToMany(mappedBy = "produit")
+    @OneToMany(mappedBy = "produit", fetch = FetchType.EAGER)
     private List<CommandeProduit> commandeProduits;
 
     public Produit() {

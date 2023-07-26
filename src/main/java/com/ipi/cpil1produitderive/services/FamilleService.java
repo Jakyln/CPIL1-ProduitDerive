@@ -8,6 +8,7 @@ import com.ipi.cpil1produitderive.pojo.VentesFamille;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,32 +33,10 @@ public class FamilleService {
      * @return VenteByFamille
      */
     public VentesFamille getVentesFamille(Long familleId) throws Exception{
-        //List<VenteByFamille> venteByFamilleList = new ArrayList<>();
         Integer quantiteVenduFamille = 0;
         Integer quantiteVenduProduit = 0;
         Double prixTotalFamille = 0.0;
-        //List<Famille> familles = familleDAO.findAll();
         Famille famille = findById(familleId);
-        /*for (Famille famille: familles) {
-            quantiteVenduFamille = 0;
-            prixTotalFamille = 0.0;
-            List<Produit> produits = famille.getProduits();
-            for (Produit produit: produits){
-                quantiteVenduProduit = 0;
-                List<CommandeProduit> commandeProduits = produit.getCommandeProduits();
-                for (CommandeProduit commandeProduit: commandeProduits){
-                    if (commandeProduit.getCommande().getValide()){
-                        quantiteVenduFamille += commandeProduit.getQuantite();
-                        quantiteVenduProduit += commandeProduit.getQuantite();
-                    }
-                }
-                prixTotalFamille += produit.getPrixVente() * quantiteVenduProduit;
-            }
-            // ajout ligne
-            VenteByFamille venteByFamille = new VenteByFamille(famille, quantiteVenduFamille, prixTotalFamille);
-            venteByFamilleList.add(venteByFamille);
-
-        }*/
         List<Produit> produits = famille.getProduits();
         for (Produit produit : produits) {
             quantiteVenduProduit = 0;
@@ -73,6 +52,36 @@ public class FamilleService {
         // objet de retour
         VentesFamille ventesFamille = new VentesFamille(famille, quantiteVenduFamille, prixTotalFamille);
         return ventesFamille;
+    }
+
+    /**
+     * Renvoit les résultats de ventes de toutes les familles
+     * @return VenteByFamille
+     */
+    public List<VentesFamille> getAllVentesFamille() {
+        Integer quantiteVenduFamille = 0;
+        Integer quantiteVenduProduit = 0;
+        Double prixTotalFamille = 0.0;
+        List<Famille> familles = familleDAO.findAll();
+        List<VentesFamille> ventesFamilles = new ArrayList<>();
+        for (Famille famille : familles) {
+            List<Produit> produits = famille.getProduits();
+            for (Produit produit : produits) {
+                quantiteVenduProduit = 0;
+                List<CommandeProduit> commandeProduits = produit.getCommandeProduits();
+                for (CommandeProduit commandeProduit : commandeProduits) {
+                    if (commandeProduit.getCommande().getValide()) {
+                        quantiteVenduFamille += commandeProduit.getQuantite();
+                        quantiteVenduProduit += commandeProduit.getQuantite();
+                    }
+                }
+                prixTotalFamille += produit.getPrixVente() * quantiteVenduProduit;
+            }
+            VentesFamille ventesFamille = new VentesFamille(famille, quantiteVenduFamille, prixTotalFamille);
+            ventesFamilles.add(ventesFamille);
+        }
+        // objet de retour
+        return ventesFamilles;
     }
 
 }
