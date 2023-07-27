@@ -91,26 +91,21 @@ public class ConsoleController {
             System.out.println();
         }
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("\tPAGE (1) STATISTIQUES COMMANDES");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println("\tPAGE (2) STATISTIQUES FAMILLE");
+        System.out.println("------------------------------------------------------------------------------------");
 
-        //System.out.printf("| %-20s | %-8s | %8s |%n", "", "Nom", "Code","Nombre de produits","Nombre vendu");
+        System.out.printf("| %-20s | %-10s | %20s | %20s |%n", "NOM", "CODE","NOMBRE DE PRODUITS","NOMBRE VENDUS");
+        System.out.println("------------------------------------------------------------------------------------");
 
         for (VentesFamille ventesFamille : ventesFamilles) {
-            /*System.out.printf("| %-20s | %-8s | %-8s |%n", "SOMME DE PRIX D'ACHAT",
+            System.out.printf("| %-20s | %-10s | %20s | %20s |%n",
                     ventesFamille.getFamille().getNom(),
                     ventesFamille.getFamille().getCode(),
                     ventesFamille.getFamille().getProduits().size(),
-                    ventesFamille.getQuantiteVendu() );*/
-            System.out.println("Nom: " + ventesFamille.getFamille().getNom());
-
-            System.out.println("Code: " + ventesFamille.getFamille().getCode());
-            System.out.println("Nombre de produits: " + ventesFamille.getFamille().getProduits().size());
-            System.out.println("Nombre vendu: " + ventesFamille.getQuantiteVendu());
-
-            System.out.println("----------------------------------------------------------------");
-            //TODO check les données comparé a BDD, rendre plus beau affichage
+                    ventesFamille.getQuantiteVendu()
+            );
+            System.out.println("------------------------------------------------------------------------------------");
         }
         System.out.println();
 
@@ -128,27 +123,22 @@ public class ConsoleController {
         for (int i = 0; i < 30; i++) {
             System.out.println();
         }
+        System.out.println("-------------------------------------------------------------------------------------------------------------------");
+        System.out.println("\tPAGE (3) STATISTIQUES PROODUIT");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------");
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("\tPAGE (1) STATISTIQUES COMMANDES");
-        System.out.println("----------------------------------------------------------------");
-
-        //System.out.printf("| %-20s | %-8s | %8s |%n", "", "Nom", "Code","Nombre de produits","Nombre vendu");
+        System.out.printf("| %-25s | %-10s | %20s | %20s | %20s |%n", "NOM", "CODE","FAMILLE","NOMBRE VENDUS","SOMME PRIX TOTAL");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------");
 
         for (VentesProduit ventesProduit : ventesProduits) {
-            /*System.out.printf("| %-20s | %-8s | %-8s |%n", "SOMME DE PRIX D'ACHAT",
-                    ventesFamille.getFamille().getNom(),
-                    ventesFamille.getFamille().getCode(),
-                    ventesFamille.getFamille().getProduits().size(),
-                    ventesFamille.getQuantiteVendu() );*/
-            System.out.println("Nom: " + ventesProduit.getProduit().getNom());
-            System.out.println("Code: " + ventesProduit.getProduit().getCode());
-            System.out.println("Famille: " + ventesProduit.getProduit().getFamille().getNom());
-            System.out.println("Quantite Vendus: " + ventesProduit.getQuantiteVendu());
-            System.out.println("Somme total des commandes : " + ventesProduit.getPrixTotal());
-
-            System.out.println("----------------------------------------------------------------");
-            //TODO check les données comparé a BDD, rendre plus beau affichage
+            System.out.printf("| %-25s | %-10s | %20s | %20s | %20s |%n",
+                    ventesProduit.getProduit().getNom(),
+                    ventesProduit.getProduit().getCode(),
+                    ventesProduit.getProduit().getFamille().getNom(),
+                    ventesProduit.getQuantiteVendu(),
+                    ventesProduit.getPrixTotal()
+            );
+            System.out.println("-------------------------------------------------------------------------------------------------------------------");
         }
         System.out.println();
 
