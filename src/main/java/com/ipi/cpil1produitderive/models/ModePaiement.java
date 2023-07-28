@@ -17,8 +17,7 @@ public class ModePaiement {
     public ModePaiement() {
     }
 
-    public ModePaiement(Long id, String nom) {
-        this.id = id;
+    public ModePaiement(String nom) {
         this.nom = nom;
     }
 

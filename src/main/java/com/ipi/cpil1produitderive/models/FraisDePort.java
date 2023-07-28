@@ -17,8 +17,7 @@ public class FraisDePort {
     public FraisDePort() {
     }
 
-    public FraisDePort(Long id, Double montant) {
-        this.id = id;
+    public FraisDePort(Double montant) {
         this.montant = montant;
     }
 

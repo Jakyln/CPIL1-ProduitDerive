@@ -1,13 +1,7 @@
 package com.ipi.cpil1produitderive.integration;
 
-import com.ipi.cpil1produitderive.dao.CommandeDAO;
-import com.ipi.cpil1produitderive.dao.CommandeProduitDAO;
-import com.ipi.cpil1produitderive.dao.FamilleDAO;
-import com.ipi.cpil1produitderive.dao.ProduitDAO;
-import com.ipi.cpil1produitderive.models.Commande;
-import com.ipi.cpil1produitderive.models.CommandeProduit;
-import com.ipi.cpil1produitderive.models.Famille;
-import com.ipi.cpil1produitderive.models.Produit;
+import com.ipi.cpil1produitderive.dao.*;
+import com.ipi.cpil1produitderive.models.*;
 import com.ipi.cpil1produitderive.pojo.VentesFamille;
 import com.ipi.cpil1produitderive.services.FamilleService;
 import org.assertj.core.api.Assertions;
@@ -35,6 +29,27 @@ public class FamilleServiceIntegration {
     CommandeProduitDAO commandeProduitDAO;
 
     @Autowired
+    FournisseurDAO fournisseurDAO;
+
+    @Autowired
+    ModePaiementDAO modePaiementDAO;
+
+    @Autowired
+    AdresseDAO adresseDAO;
+
+    @Autowired
+    UtilisateurDAO utilisateurDAO;
+
+    @Autowired
+    RoleDAO roleDAO;
+
+    @Autowired
+    PaysDAO paysDAO;
+
+    @Autowired
+    FraisDePortDAO fraisDePortDAO;
+
+    @Autowired
     FamilleService familleService;
 
     @BeforeEach
@@ -43,6 +58,13 @@ public class FamilleServiceIntegration {
         commandeDAO.deleteAll();
         produitDAO.deleteAll();
         familleDAO.deleteAll();
+        fournisseurDAO.deleteAll();
+        modePaiementDAO.deleteAll();
+        utilisateurDAO.deleteAll();
+        adresseDAO.deleteAll();
+        roleDAO.deleteAll();
+        paysDAO.deleteAll();
+        fraisDePortDAO.deleteAll();
     }
 
     @Test
@@ -51,16 +73,56 @@ public class FamilleServiceIntegration {
         Famille famille = new Famille("figurine", "FIG");
         Famille getFamille = familleDAO.save(famille);
 
+        Fournisseur fournisseur = new Fournisseur("F1");
+        fournisseurDAO.save(fournisseur);
+
+        ModePaiement modePaiement = new ModePaiement("carte bancaire");
+        modePaiementDAO.save(modePaiement);
+
+        FraisDePort fraisDePort = new FraisDePort(2.0);
+        fraisDePortDAO.save(fraisDePort);
+
+        Pays pays = new Pays("france", 1);
+        pays.setFraisDePort(fraisDePort);
+        paysDAO.save(pays);
+
+        Adresse adresse = new Adresse("a", "b", "c");
+        adresse.setPays(pays);
+        adresseDAO.save(adresse);
+
+        Role role = new Role("client");
+        roleDAO.save(role);
+
+        Utilisateur utilisateur = new Utilisateur("aaa","bbb");
+        utilisateur.setRole(role);
+        utilisateur.setPays(pays);
+        utilisateur.setAdresse(adresse);
+        utilisateurDAO.save(utilisateur);
+
         Produit produit1 = new Produit("P1", "P1", 2.5, 8.0, LocalDate.now(), 40);
         Produit produit2 = new Produit("P2", "P2", 3.5, 10.0, LocalDate.now(), 30);
         produit1.setFamille(famille);
         produit2.setFamille(famille);
+        produit1.setFournisseur(fournisseur);
+        produit2.setFournisseur(fournisseur);
         produitDAO.save(produit1);
         produitDAO.save(produit2);
 
         Commande commandeOnlineValide1 = new Commande(LocalDate.now(), LocalDateTime.now(),true,true);
         Commande commandeNotOnlineValide = new Commande(LocalDate.now(), LocalDateTime.now(),false,true);
         Commande commandeOnlineNotValide = new Commande(LocalDate.now(), LocalDateTime.now(),true,false);
+        commandeOnlineValide1.setModePaiement(modePaiement);
+        commandeNotOnlineValide.setModePaiement(modePaiement);
+        commandeOnlineNotValide.setModePaiement(modePaiement);
+        commandeOnlineValide1.setAdresseLivraison(adresse);
+        commandeOnlineValide1.setAdresseFacturation(adresse);
+        commandeNotOnlineValide.setAdresseLivraison(adresse);
+        commandeNotOnlineValide.setAdresseFacturation(adresse);
+        commandeOnlineNotValide.setAdresseLivraison(adresse);
+        commandeOnlineNotValide.setAdresseFacturation(adresse);
+        commandeOnlineValide1.setUtilisateur(utilisateur);
+        commandeNotOnlineValide.setUtilisateur(utilisateur);
+        commandeOnlineNotValide.setUtilisateur(utilisateur);
         commandeDAO.save(commandeOnlineValide1);
         commandeDAO.save(commandeNotOnlineValide);
         commandeDAO.save(commandeOnlineNotValide);

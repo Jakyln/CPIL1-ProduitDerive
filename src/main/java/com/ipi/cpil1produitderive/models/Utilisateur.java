@@ -30,8 +30,7 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(Long id, String email, String motDePasse) {
-        this.id = id;
+    public Utilisateur(String email, String motDePasse) {
         this.email = email;
         this.motDePasse = motDePasse;
     }

@@ -22,8 +22,7 @@ public class Fournisseur {
     public Fournisseur() {
     }
 
-    public Fournisseur(Long id, String nom) {
-        this.id = id;
+    public Fournisseur(String nom) {
         this.nom = nom;
     }
 
