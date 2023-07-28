@@ -37,9 +37,20 @@ public class ConsoleController {
 
         //Lit l'entier écrit par l'utilisateur et l'affecte
         int pageToGo = scanner.nextInt();
-
         int valueToReturnToMenu = 0;
 
+        while(
+                pageToGo != 1 &&
+                pageToGo != 2 &&
+                pageToGo != 3
+        )
+        {
+            System.out.print("MAUVAISE VALEUR RENTRE");
+            this.printMenu();
+            Scanner scanner2 = new Scanner(System.in);
+            System.out.print("Rentrer dans la page : ");
+            pageToGo = scanner2.nextInt();
+        }
         switch (pageToGo){
             case 1 :
                 valueToReturnToMenu = this.printPageCommandes();
@@ -107,14 +118,24 @@ public class ConsoleController {
             );
             System.out.println("------------------------------------------------------------------------------------");
         }
-        System.out.println();
+        return returnValueUserInput();
+    }
 
+    public int returnValueUserInput(){
+        System.out.println();
         Scanner scannerToExit = new Scanner(System.in);
         System.out.println("(1) Retour au menu ");
 
         System.out.print("Rentrer dans la page :");
-
-        return scannerToExit.nextInt();
+        int valeurRetour = scannerToExit.nextInt();
+        while(valeurRetour != 1){
+            System.out.println("MAUVAISE VALEUR RENTRE");
+            System.out.println("(1) Retour au menu ");
+            Scanner scannerToExit2 = new Scanner(System.in);
+            System.out.print("Rentrer dans la page :");
+            valeurRetour = scannerToExit2.nextInt();
+        }
+        return valeurRetour;
     }
     public int printPageProduit() throws Exception {
 
@@ -140,14 +161,7 @@ public class ConsoleController {
             );
             System.out.println("-------------------------------------------------------------------------------------------------------------------");
         }
-        System.out.println();
-
-        Scanner scannerToExit = new Scanner(System.in);
-        System.out.println("(1) Retour au menu ");
-
-        System.out.print("Rentrer dans la page :");
-
-        return scannerToExit.nextInt();
+        return returnValueUserInput();
     }
 
     public int  printPageCommandes(){
@@ -172,15 +186,7 @@ public class ConsoleController {
         System.out.printf("| %-20s | %-8s | %-8s |%n", "SOMME DE PRIX D'ACHAT", sumPrixAchatOfCommandeNotOnline, sumPrixAchatCommandeOnline );
         System.out.printf("| %-20s | %-8s | %-8s |%n", "SOMME DE PRIX DE VENTE", sumPrixVenteOfCommandeNotOnline, sumPrixVenteOfCommandeOnline );
         System.out.println("----------------------------------------------------------------");
-        System.out.println();
-
-        Scanner scannerToExit = new Scanner(System.in);
-        System.out.println("(1) Retour au menu ");
-
-
-        System.out.print("Rentrer dans la page :");
-
-        return scannerToExit.nextInt();
+        return returnValueUserInput();
     }
 
 
