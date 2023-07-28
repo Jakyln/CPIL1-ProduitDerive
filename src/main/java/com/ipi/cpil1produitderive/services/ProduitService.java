@@ -44,20 +44,10 @@ public class ProduitService {
     }
 
     public List<VentesProduit> getAllVentesProduit() throws Exception {
-        Integer quantiteVenduProduit = 0;
-        Double prixTotalProduit = 0.0;
         List<Produit> produits = produitDAO.findAll();
         List<VentesProduit> ventesProduits = new ArrayList<>();
-        for (Produit produit : produits) {
-            List<CommandeProduit> commandeProduits = produit.getCommandeProduits();
-            for (CommandeProduit commandeProduit : commandeProduits) {
-                if (commandeProduit.getCommande().getValide()) {
-                    quantiteVenduProduit += commandeProduit.getQuantite();
-                }
-            }
-            prixTotalProduit += produit.getPrixVente() * quantiteVenduProduit;
-            // objet de retour
-            VentesProduit ventesProduit = new VentesProduit(produit, quantiteVenduProduit, prixTotalProduit);
+        for (Produit produit : produits){
+            VentesProduit ventesProduit = getVentesProduit(produit.getId());
             ventesProduits.add(ventesProduit);
         }
         return ventesProduits;
