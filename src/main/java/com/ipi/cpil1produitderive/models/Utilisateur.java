@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity(name = "utilisateur")
-@Table(name = "utilisateur", schema = "produit_derive", catalog = "produit_derive")
+@Table(name = "utilisateur")
 public class Utilisateur {
 
     @Id

@@ -3,7 +3,7 @@ package com.ipi.cpil1produitderive.models;
 import jakarta.persistence.*;
 
 @Entity(name = "commandeProduit")
-@Table(name = "commandeProduit", schema = "produit_derive", catalog = "produit_derive")
+@Table(name = "commandeProduit")
 public class CommandeProduit {
 
     @Id
