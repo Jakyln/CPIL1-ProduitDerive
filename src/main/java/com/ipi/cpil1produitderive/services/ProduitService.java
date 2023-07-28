@@ -7,6 +7,7 @@ import com.ipi.cpil1produitderive.pojo.VentesProduit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,5 +41,15 @@ public class ProduitService {
         // objet de retour
         VentesProduit ventesProduit = new VentesProduit(produit, quantiteVenduProduit, prixTotalProduit);
         return ventesProduit;
+    }
+
+    public List<VentesProduit> getAllVentesProduit() throws Exception {
+        List<Produit> produits = produitDAO.findAll();
+        List<VentesProduit> ventesProduits = new ArrayList<>();
+        for (Produit produit : produits){
+            VentesProduit ventesProduit = getVentesProduit(produit.getId());
+            ventesProduits.add(ventesProduit);
+        }
+        return ventesProduits;
     }
 }

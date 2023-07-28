@@ -2,17 +2,22 @@ package com.ipi.cpil1produitderive.models;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "pays")
+@Table(name = "pays")
 public class Pays {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nom")
     private String nom;
+    @Column(name = "dureeLivraison")
     private Integer dureeLivraison;
 
     @OneToOne
+    @JoinColumn(name = "idFraisDePort")
     private FraisDePort fraisDePort;
 
     public Pays() {

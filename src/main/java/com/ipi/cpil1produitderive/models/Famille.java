@@ -4,14 +4,18 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
+@Entity(name = "famille")
+@Table(name = "famille")
 public class Famille {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nom")
     private String nom;
+    @Column(name = "code")
     private String code;
 
     @OneToMany(mappedBy = "famille", fetch = FetchType.EAGER)

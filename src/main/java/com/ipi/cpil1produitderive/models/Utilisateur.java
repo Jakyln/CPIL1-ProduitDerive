@@ -4,24 +4,28 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
+@Entity(name = "utilisateur")
+@Table(name = "utilisateur")
 public class Utilisateur {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name="email")
     private String email;
+    @Column(name="motDePasse")
     private String motDePasse;
-
     @ManyToOne
+    @JoinColumn(name="idAdresse")
     private Adresse adresse;
     @ManyToOne
+    @JoinColumn(name="idPays")
     private Pays pays;
     @ManyToOne
+    @JoinColumn(name="idRole")
     private Role role;
-    @OneToMany(mappedBy = "utilisateur")
-    private List<Commande> commandes;
 
     public Utilisateur() {
     }
@@ -80,14 +84,6 @@ public class Utilisateur {
         this.role = role;
     }
 
-    public List<Commande> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(List<Commande> commandes) {
-        this.commandes = commandes;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Utilisateur{");
@@ -97,7 +93,6 @@ public class Utilisateur {
         sb.append(", adresse=").append(adresse);
         sb.append(", pays=").append(pays);
         sb.append(", role=").append(role);
-        sb.append(", commandes=").append(commandes);
         sb.append('}');
         return sb.toString();
     }

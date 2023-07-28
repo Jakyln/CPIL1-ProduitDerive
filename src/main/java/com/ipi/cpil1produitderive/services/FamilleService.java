@@ -8,6 +8,7 @@ import com.ipi.cpil1produitderive.pojo.VentesFamille;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +52,20 @@ public class FamilleService {
         // objet de retour
         VentesFamille ventesFamille = new VentesFamille(famille, quantiteVenduFamille, prixTotalFamille);
         return ventesFamille;
+    }
+
+    /**
+     * Renvoit les résultats de ventes de toutes les familles
+     * @return VenteByFamille
+     */
+    public List<VentesFamille> getAllVentesFamille() throws Exception {
+        List<VentesFamille> ventesFamilles = new ArrayList<>();
+        List<Famille> familles = familleDAO.findAll();
+        for (Famille famille : familles){
+            VentesFamille ventesFamille = getVentesFamille(famille.getId());
+            ventesFamilles.add(ventesFamille);
+        }
+        return ventesFamilles;
     }
 
 }
