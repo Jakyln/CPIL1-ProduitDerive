@@ -35,7 +35,7 @@ public class CommandeServiceTest {
 
     @Mock
     CommandeDAO commandeDAO;
-
+    @Test
     public void testGetSumPrixAchatOfCommandeOnline(){
         Produit produit1 = new Produit("P1", "P1", 2.5, 8.0, LocalDate.now(), 40);
         Produit produit2 = new Produit("P2", "P2", 3.5, 10.0, LocalDate.now(), 30);
@@ -91,21 +91,11 @@ public class CommandeServiceTest {
         commandes.add(commandeNotOnlineNotValide);
         commandes.add(commandeOnlineValide2);
 
-        double sumPrixAchatCommandeOnline = 0d;
-        for (Commande commande : commandes) {
-            if(commande.getPurchasedOnline()){
-                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                for (CommandeProduit commandeProduit : commandeProduits) {
-                    sumPrixAchatCommandeOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
-                }
-            }
-        }
-
         Mockito.when(commandeDAO.findAll()).thenReturn(commandes);
         double result = commandeService.getSumPrixAchatOfCommandeOnline();
-        Assertions.assertThat(result).isEqualTo(sumPrixAchatCommandeOnline);
+        Assertions.assertThat(result).isEqualTo(91);
     }
-
+    @Test
     public void testGetSumPrixAchatOfCommandeNotOnline(){
         Produit produit1 = new Produit("P1", "P1", 2.5, 8.0, LocalDate.now(), 40);
         Produit produit2 = new Produit("P2", "P2", 3.5, 10.0, LocalDate.now(), 30);
@@ -161,20 +151,11 @@ public class CommandeServiceTest {
         commandes.add(commandeNotOnlineNotValide);
         commandes.add(commandeOnlineValide2);
 
-        double sumPrixAchatCommandeNotOnline = 0d;
-        for (Commande commande : commandes) {
-            if(!commande.getPurchasedOnline()){
-                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                for (CommandeProduit commandeProduit : commandeProduits) {
-                    sumPrixAchatCommandeNotOnline += commandeProduit.getProduit().getPrixAchat() * commandeProduit.getQuantite();
-                }
-            }
-        }
-
         Mockito.when(commandeDAO.findAll()).thenReturn(commandes);
         double result = commandeService.getSumPrixAchatOfCommandeNotOnline();
-        Assertions.assertThat(result).isEqualTo(sumPrixAchatCommandeNotOnline);
+        Assertions.assertThat(result).isEqualTo(57);
     }
+    @Test
     public void testGetSumPrixVenteOfCommandeOnline(){
         Produit produit1 = new Produit("P1", "P1", 2.5, 8.0, LocalDate.now(), 40);
         Produit produit2 = new Produit("P2", "P2", 3.5, 10.0, LocalDate.now(), 30);
@@ -230,21 +211,12 @@ public class CommandeServiceTest {
         commandes.add(commandeNotOnlineNotValide);
         commandes.add(commandeOnlineValide2);
 
-        double sumPrixVenteCommandeOnline = 0d;
-        for (Commande commande : commandes) {
-            if(commande.getPurchasedOnline()){
-                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                for (CommandeProduit commandeProduit : commandeProduits) {
-                    sumPrixVenteCommandeOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
-                }
-            }
-        }
-
         Mockito.when(commandeDAO.findAll()).thenReturn(commandes);
         double result = commandeService.getSumPrixVenteOfCommandeOnline();
-        Assertions.assertThat(result).isEqualTo(sumPrixVenteCommandeOnline);
+        Assertions.assertThat(result).isEqualTo(272);
     }
 
+    @Test
     public void testGetSumPrixVenteOfCommandeNotOnline(){
         Produit produit1 = new Produit("P1", "P1", 2.5, 8.0, LocalDate.now(), 40);
         Produit produit2 = new Produit("P2", "P2", 3.5, 10.0, LocalDate.now(), 30);
@@ -300,18 +272,8 @@ public class CommandeServiceTest {
         commandes.add(commandeNotOnlineNotValide);
         commandes.add(commandeOnlineValide2);
 
-        double sumPrixVenteCommandeNotOnline = 0d;
-        for (Commande commande : commandes) {
-            if(!commande.getPurchasedOnline()){
-                List<CommandeProduit> commandeProduits = commande.getCommandeProduits();
-                for (CommandeProduit commandeProduit : commandeProduits) {
-                    sumPrixVenteCommandeNotOnline += commandeProduit.getProduit().getPrixVente() * commandeProduit.getQuantite();
-                }
-            }
-        }
-
         Mockito.when(commandeDAO.findAll()).thenReturn(commandes);
         double result = commandeService.getSumPrixVenteOfCommandeNotOnline();
-        Assertions.assertThat(result).isEqualTo(sumPrixVenteCommandeNotOnline);
+        Assertions.assertThat(result).isEqualTo(171);
     }
 }
