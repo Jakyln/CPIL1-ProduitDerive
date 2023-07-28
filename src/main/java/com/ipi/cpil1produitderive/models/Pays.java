@@ -23,8 +23,7 @@ public class Pays {
     public Pays() {
     }
 
-    public Pays(Long id, String nom, Integer dureeLivraison) {
-        this.id = id;
+    public Pays(String nom, Integer dureeLivraison) {
         this.nom = nom;
         this.dureeLivraison = dureeLivraison;
     }
