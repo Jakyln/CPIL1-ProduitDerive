@@ -39,10 +39,10 @@ public class FamilleServiceIntegration {
 
     @BeforeEach
     public void delete(){
-        familleDAO.deleteAll();
         commandeProduitDAO.deleteAll();
-        produitDAO.deleteAll();
         commandeDAO.deleteAll();
+        produitDAO.deleteAll();
+        familleDAO.deleteAll();
     }
 
     @Test
@@ -79,10 +79,8 @@ public class FamilleServiceIntegration {
         commandeProduitDAO.save(commandeProduitC3P2);
 
         //when
-        System.out.println("famille d'id -> " + getFamille.getId());
         Long idFamille = getFamille.getId();
         VentesFamille ventesFamille = familleService.getVentesFamille(idFamille);
-        System.out.println("avant assert");
 
         //then
         Assertions.assertThat(ventesFamille.famille.getId()).isEqualTo(getFamille.getId());

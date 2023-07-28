@@ -83,7 +83,7 @@ public class ConsoleController {
     }
 
     //On retournera la valeur de retour au menu
-    public int printPageFamille() {
+    public int printPageFamille() throws Exception {
 
         List<VentesFamille> ventesFamilles = familleService.getAllVentesFamille();
 
@@ -95,14 +95,14 @@ public class ConsoleController {
         System.out.println("\tPAGE (2) STATISTIQUES FAMILLE");
         System.out.println("------------------------------------------------------------------------------------");
 
-        System.out.printf("| %-20s | %-10s | %20s | %20s |%n", "NOM", "CODE","NOMBRE DE PRODUITS","NOMBRE VENDUS");
+        System.out.printf("| %-20s | %-10s | %20s | %20s |%n", "NOM", "CODE","PRIX TOTAL","NOMBRE VENDUS");
         System.out.println("------------------------------------------------------------------------------------");
 
         for (VentesFamille ventesFamille : ventesFamilles) {
             System.out.printf("| %-20s | %-10s | %20s | %20s |%n",
                     ventesFamille.getFamille().getNom(),
                     ventesFamille.getFamille().getCode(),
-                    ventesFamille.getFamille().getProduits().size(),
+                    ventesFamille.getPrixTotal(),
                     ventesFamille.getQuantiteVendu()
             );
             System.out.println("------------------------------------------------------------------------------------");
