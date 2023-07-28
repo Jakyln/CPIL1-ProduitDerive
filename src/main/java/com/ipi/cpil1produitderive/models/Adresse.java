@@ -2,25 +2,30 @@ package com.ipi.cpil1produitderive.models;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "adresse")
+@Table(name = "adresse")
 public class Adresse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "rue")
     private String rue;
+    @Column(name = "codePostal")
     private String codePostal;
+    @Column(name = "ville")
     private String ville;
 
     @ManyToOne
+    @JoinColumn(name="idPays")
     private Pays pays;
 
     public Adresse() {
     }
 
-    public Adresse(Long id, String rue, String codePostal, String ville) {
-        this.id = id;
+    public Adresse(String rue, String codePostal, String ville) {
         this.rue = rue;
         this.codePostal = codePostal;
         this.ville = ville;

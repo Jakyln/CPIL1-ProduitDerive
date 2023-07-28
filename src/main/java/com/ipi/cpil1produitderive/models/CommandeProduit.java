@@ -2,25 +2,29 @@ package com.ipi.cpil1produitderive.models;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "commandeProduit")
+@Table(name = "commandeProduit")
 public class CommandeProduit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "quantite")
     private Integer quantite;
 
     @ManyToOne
+    @JoinColumn(name = "idCommande")
     private Commande commande;
     @ManyToOne
+    @JoinColumn(name = "idProduit")
     private Produit produit;
 
     public CommandeProduit() {
     }
 
-    public CommandeProduit(Long id, Integer quantite, Commande commande, Produit produit) {
-        this.id = id;
+    public CommandeProduit(Integer quantite, Commande commande, Produit produit) {
         this.quantite = quantite;
         this.commande = commande;
         this.produit = produit;

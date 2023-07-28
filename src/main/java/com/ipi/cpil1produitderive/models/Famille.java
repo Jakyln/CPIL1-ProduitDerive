@@ -4,24 +4,27 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
+@Entity(name = "famille")
+@Table(name = "famille")
 public class Famille {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nom")
     private String nom;
+    @Column(name = "code")
     private String code;
 
-    @OneToMany(mappedBy = "famille")
+    @OneToMany(mappedBy = "famille", fetch = FetchType.EAGER)
     private List<Produit> produits;
 
     public Famille() {
     }
 
-    public Famille(Long id, String nom, String code) {
-        this.id = id;
+    public Famille(String nom, String code) {
         this.nom = nom;
         this.code = code;
     }

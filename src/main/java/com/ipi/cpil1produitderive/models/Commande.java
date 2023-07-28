@@ -6,26 +6,36 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
+@Entity(name = "commande")
+@Table(name = "commande")
 public class Commande {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "dateLivraison")
     private LocalDate dateLivraison;
+    @Column(name = "dateCommande")
     private LocalDateTime dateCommande;
+    @Column(name = "isPurchasedOnline")
     private Boolean isPurchasedOnline;
+    @Column(name = "isValide")
     private Boolean isValide;
 
     @ManyToOne
+    @JoinColumn(name = "idUtilisateur")
     private Utilisateur utilisateur;
     @ManyToOne
+    @JoinColumn(name = "idModePaiement")
     private ModePaiement modePaiement;
     @ManyToOne
+    @JoinColumn(name = "idAdresseLivraison")
     private Adresse adresseLivraison;
     @ManyToOne
-    private Adresse adresseFacturtion;
+    @JoinColumn(name = "idAdresseFacturation")
+    private Adresse adresseFacturation;
 
     @OneToMany(mappedBy = "commande")
     private List<CommandeProduit> commandeProduits;
@@ -33,8 +43,7 @@ public class Commande {
     public Commande() {
     }
 
-    public Commande(Long id, LocalDate dateLivraison, LocalDateTime dateCommande, Boolean isPurchasedOnline, Boolean isValide) {
-        this.id = id;
+    public Commande(LocalDate dateLivraison, LocalDateTime dateCommande, Boolean isPurchasedOnline, Boolean isValide) {
         this.dateLivraison = dateLivraison;
         this.dateCommande = dateCommande;
         this.isPurchasedOnline = isPurchasedOnline;
@@ -105,12 +114,12 @@ public class Commande {
         this.adresseLivraison = adresseLivraison;
     }
 
-    public Adresse getAdresseFacturtion() {
-        return adresseFacturtion;
+    public Adresse getAdresseFacturation() {
+        return adresseFacturation;
     }
 
-    public void setAdresseFacturtion(Adresse adresseFacturtion) {
-        this.adresseFacturtion = adresseFacturtion;
+    public void setAdresseFacturation(Adresse adresseFacturation) {
+        this.adresseFacturation = adresseFacturation;
     }
 
     public List<CommandeProduit> getCommandeProduits() {
@@ -132,7 +141,7 @@ public class Commande {
         sb.append(", utilisateur=").append(utilisateur);
         sb.append(", modePaiement=").append(modePaiement);
         sb.append(", adresseLivraison=").append(adresseLivraison);
-        sb.append(", adresseFacturtion=").append(adresseFacturtion);
+        sb.append(", adresseFacturation=").append(adresseFacturation);
         sb.append('}');
         return sb.toString();
     }
